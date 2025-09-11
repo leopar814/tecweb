@@ -30,6 +30,7 @@
         echo '<li>$house*5 es inválida porque el símbolo * no está permitido.</li>';
         echo '</ul>';
     ?>
+    <hr>
 
     <h2>Ejercicio 2</h2>
     <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
@@ -70,6 +71,7 @@
             Por esta razón las 3 variables contienen el mismo valor.
         </p>
     </ol>
+    <hr>
 
     <h2>Ejercicio 3</h2>
     <p>
@@ -78,14 +80,35 @@
         arreglo):
     </p>
     <p>
-        $a = "PHP5";
-        $z[] = &$a;
-        $b = "5a version de PHP";
-        $c = $b*10;
-        $a .= $b;
-        $b *= $c;
+        $a = "PHP5";<br>
+        $z[] = &$a;<br>
+        $b = "5a version de PHP";<br>
+        $c = $b*10;<br>
+        $a .= $b;<br>
+        $b *= $c;<br>
         $z[0] = "MySQL";        
     </p>
+    <?php
+        $a = "PHP5";
+        echo '<ul>';
+        echo '<li>$a=' . $a . '</li>';
+        $z[] = &$a;
+        echo '<li>$z[]='; print_r($z) ; echo '</li>';
+        $b = "5a version de PHP";
+        echo '<li>$b=' . $b . '</li>';
+        @$c = $b*10;
+        echo '<li>$c=' . $c . '</li>';
+        $a .= $b;
+        echo '<li>$a=' . $a . '</li>';
+        $b *= $c;
+        echo '<li>$b=' . $b . '</li>';
+        $z[0] = "MySQL"; 
+        echo '<li>$z[0]=' . $z[0] . '</li>';
+        echo '</ul>';
+    ?>
+    <hr>
+
+    <h2>Ejercicio 4</h2>
 
 
 </body>
