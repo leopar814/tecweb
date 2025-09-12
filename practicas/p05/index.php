@@ -46,9 +46,9 @@
             $b = "MySQL";
             $c = &$a;
 
-            echo '<p>$a=' .  $a . '</p>';
-            echo '<p>$b=' .  $b . '</p>';
-            echo '<p>$c=' .  $c . '</p>';
+            echo "<p>\$a = $a </p>";
+            echo "<p>\$b = $b </p>";
+            echo "<p>\$c = $c </p>";
 
         ?>
         <li>Agrega al código actual las siguientes asignaciones:</li>
@@ -60,9 +60,11 @@
         <?php
             $a = "PHP server";
             $b = &$a;
-            echo '<p>$a=' .  $a . '</p>';
-            echo '<p>$b=' .  $b . '</p>';
-            echo '<p>$c=' .  $c . '</p>';
+            echo "<p>\$a = $a </p>";
+            echo "<p>\$b = $b </p>";
+            echo "<p>\$c = $c </p>";
+
+            unset($b, $c); // se elimina variables para evitar futuras referencias 
         ?>
         <li>Describe en y muestra en la página obtenida qué ocurrió en el segundo bloque de asignaciones</li>
         <p>
@@ -91,24 +93,71 @@
     <?php
         $a = "PHP5";
         echo '<ul>';
-        echo '<li>$a=' . $a . '</li>';
+        echo "<li>\$a = $a </li>";
         $z[] = &$a;
         echo '<li>$z[]='; print_r($z) ; echo '</li>';
         $b = "5a version de PHP";
-        echo '<li>$b=' . $b . '</li>';
+        echo "<li>\$b = $b </li>";
         @$c = $b*10;
-        echo '<li>$c=' . $c . '</li>';
+        echo "<li>\$c = $c </li>";;
         $a .= $b;
-        echo '<li>$a=' . $a . '</li>';
-        $b *= $c;
-        echo '<li>$b=' . $b . '</li>';
+        echo "<li>\$a = $a </li>";
+        @$b *= $c;
+        echo "<li>\$b = $b </li>";
         $z[0] = "MySQL"; 
-        echo '<li>$z[0]=' . $z[0] . '</li>';
+        echo "<li>\$z[0]= $z[0] </li>";
         echo '</ul>';
     ?>
     <hr>
 
     <h2>Ejercicio 4</h2>
+    <p>
+        Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de 
+        la matriz $GLOBALS o del modificador global de PHP.
+    </p>
+    <?php
+        echo '<ul>';
+            echo '<li>$a=' . $GLOBALS['a'] . '</li>';
+            echo '<li>$z[]='; print_r($GLOBALS['z']) ; echo '</li>';
+            echo '<li>$b=' . $GLOBALS['b'] . '</li>';
+            echo '<li>$c=' . $GLOBALS['c'] . '</li>';
+            echo '<li>$z[0]=' . $GLOBALS['z'][0] . '</li>';
+        echo '</ul>';
+
+        unset($z)
+    ?>
+    <hr>
+
+    <h2>Ejercicio 5</h2>
+    <p>
+        Dar el valor de las variables $a, $b, $c al final del siguiente script: <br>
+        $a = “7 personas”; <br>
+        $b = (integer) $a; <br>
+        $a = “9E3”;<br>
+        $c = (double) $a;
+    </p>
+
+    <?php
+        $a = "7 personas";
+        $b = (integer) $a;
+        $a = "9E32";
+        $c = (double) $a;
+
+        echo '<ul>';
+            echo "<li>\$a = $a</li>";
+            echo "<li>\$b = $b</li>";
+            echo "<li>\$c = $c</li>";
+        echo '</ul>';
+
+    ?>
+    <hr>
+
+    <h2>Ejercicio 6</h2>
+    <p>
+        Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas
+        usando la función var_dump(<datos>).
+    </p>
+
 
 
 </body>
