@@ -190,9 +190,23 @@
         echo '<span>$e = </span>'; echo var_export($e); echo '<br>';
     ?>
     <hr>
-    
-    <h2>Ejercicio 7</h2>
 
+    <h2>Ejercicio 7</h2>
+    <p>Usando la variable predefinida $_SERVER, determina lo siguiente:</p>
+    <ol>
+        <li>La versión de Apache y PHP,</li>
+        <li>El nombre del sistema operativo (servidor),</li>
+        <li>El idioma del navegador (cliente).</li>
+    </ol>
+
+    <?php
+        echo '<ul>';
+        echo '<li>Apache y PHP: ' . $_SERVER['SERVER_SOFTWARE'] . '</li>';
+        echo '<li>SO: ' . php_uname() . '</li>';
+        echo '<li>Idioma del navegador: ' . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . '</li>';
+
+        echo '</ul>';
+    ?>
     
 
 
