@@ -129,8 +129,8 @@
     <hr>
 
     <h2>Ejercicio 5</h2>
+    <p>Dar el valor de las variables $a, $b, $c al final del siguiente script:</p>
     <p>
-        Dar el valor de las variables $a, $b, $c al final del siguiente script: <br>
         $a = “7 personas”; <br>
         $b = (integer) $a; <br>
         $a = “9E3”;<br>
@@ -154,9 +154,46 @@
 
     <h2>Ejercicio 6</h2>
     <p>
+        $a = “0”;<br>
+        $b = “TRUE”;<br>
+        $c = FALSE;<br>
+        $d = ($a OR $b);<br>
+        $e = ($a AND $c);<br>
+        $f = ($a XOR $b);
+    </p>
+    <p>
         Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas
         usando la función var_dump(<datos>).
     </p>
+    <?php
+        $a = "0";
+        $b = "TRUE";
+        $c = FALSE;
+        $d = ($a OR $b);
+        $e = ($a AND $c);
+        $f = ($a XOR $b);
+
+        echo '<span>$a = </span>'; var_dump((bool)$a); echo '<br>';
+        echo '<span>$b = </span>'; var_dump((bool)$b); echo '<br>';
+        echo '<span>$c = </span>'; var_dump($c); echo '<br>';
+        echo '<span>$d = </span>'; var_dump($d); echo '<br>';
+        echo '<span>$e = </span>'; var_dump($e); echo '<br>';
+        echo '<span>$e = </span>'; var_dump($f); echo '<br>';
+    ?>
+    <p>
+        Después investiga una función de PHP que permita transformar el valor booleano de $c y $e
+        en uno que se pueda mostrar con un echo
+    </p>
+
+    <?php
+        echo '<span>$c = </span>'; echo var_export($c); echo '<br>';
+        echo '<span>$e = </span>'; echo var_export($e); echo '<br>';
+    ?>
+    <hr>
+    
+    <h2>Ejercicio 7</h2>
+
+    
 
 
 
