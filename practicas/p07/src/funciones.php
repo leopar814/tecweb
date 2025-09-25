@@ -15,10 +15,13 @@
 
     // Ejercicio 2
     function secuencia3Numeros() {
-        $secuencias[][3];
+        $secuencias = []; // matriz de Fx3
         $secuenciaObtenida = false;
-        $fila = 1;
+        $fila = 0;
+
+        
         do {
+            // Ciclo de repetición para cada fila de la matriz
             for($i = 0; $i < 3; $i++) {
                 $aleatorio = rand(1, 1000);
                 $secuencias[$fila][$i] = $aleatorio;
@@ -35,6 +38,10 @@
             $fila++;
 
         } while (!$secuenciaObtenida);
+
+        $numerosObtenidos = $fila * 3; // F filas * 3 números generados 
+
+        echo "<p>$numerosObtenidos números obtenidos en $fila iteraciones</p>";
 
     }
 

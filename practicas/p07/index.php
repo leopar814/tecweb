@@ -15,6 +15,16 @@
     <hr>
 
     <h2>Ejercicio 2</h2>
+    <p>
+        Crea un programa para la generación repetitiva de 3 números aleatorios hasta obtener una secuencia compuesta por: <br><br>
+        <span><b style="color:blue;">impar</b> <b style="color:red;">par</b> <b style="color:blue;">impar</b></span>
+    </p>
+    <?php
+        secuencia3Numeros();
+    ?>
+    <hr>
+
+    <h2>Ejercicio 3</h2>
 <!-- 
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p07/index.php" method="post">
