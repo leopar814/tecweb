@@ -12,10 +12,14 @@
 
         if(isset($_POST['consulta']) && isset($_POST['matricula'])) {
             $consulta = $_POST['consulta'];
-            $matricula = $_POST['matricula'];
+            if($_POST['matricula'] == "" && $_POST['consulta'] == "Consultar"){
+                echo "<p style='font-size:18px;'><b>Ingresa una matrícula válida<b></p>";
+                return;
+            } else 
+                $matricula = $_POST['matricula'];
         }
         else 
-            echo '<p>Error en POST</p>';
+            echo '<p">Error en POST</p>';
 
         // Dependiendo del tipo del Submit, se muestra 1 vehículo o todos
         if($consulta == 'Consultar') 
@@ -30,12 +34,17 @@
                 echo "<h2> $clave: </h2>";
                 echo "<ul>";
                 foreach($info as $claveInterior => $atributo) {
-                    echo "<li>$claveInterior: {$atributo}</li>";
+                    echo '<li>' . ucfirst($claveInterior) . " : {$atributo}</li>";
                 }
                 echo "</ul>";
             }
             echo "<hr>";
-        
+        }
+
+        // Se muestra la estructura del arreglo
+        if($consulta == 'Consultar') {
+            echo '<h4>Estructura general del arreglo:</h4>';
+            echo print_r($vehiculos);
         }
     ?>
 </body>

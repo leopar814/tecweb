@@ -81,7 +81,7 @@
 
     <form action="http://localhost/tecweb/practicas/p07/src/ejercicio6.php" method="post">
         <fieldset>
-            <legend>Parque vehicular</legend>
+            <legend>Parque vehicular</legend><br>
             <label>Matrícula: </label><input type="text" name="matricula"><br><br>
 
             <input type="submit" name="consulta" value="Consultar">

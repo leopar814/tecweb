@@ -11,9 +11,9 @@
             $edad = $_POST['edad'];
             $sexo = $_POST['sexo'];
             if(($edad >= 18 && $edad <= 35) && $sexo == "femenino")
-                echo '<p style="font-size:18px; color:green">Bienvenida, usted está en el rango de edad permitido</p>';
+                echo '<p style="font-size:35px; color:green">Bienvenida, usted está en el rango de edad permitido</p>';
             else 
-                echo '<p style="font-size:18px; color:red">Lo siento, algún dato no es válido</p>';
+                echo '<p style="font-size:35px; color:red">Lo siento, algún dato no es válido</p>';
         } else {
 
             echo '<p>Error en POST</p>';
