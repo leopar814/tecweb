@@ -38,37 +38,20 @@
     ?>
     <hr>
 
+    
     <h2>Ejercicio 4</h2>
     <p>
         Crear un arreglo cuyos índices van de 97 a 122 y cuyos valores son las letras de la ‘a’
         a la ‘z’. Usa la función chr(n) que devuelve el caracter cuyo código ASCII es n para poner
         el valor en cada índice
     </p>
-    <table 
-        border="1" cellspacing="0" cellpadding="5" 
-        style="text-align:center; vertical-align:middle;"
-    >
-            <tr>
-                <th>índice</th>
-                <th>Valor</th>
-            </tr>
         <?php
-            $ASCII = codigoASCII();
-            foreach($ASCII as $indice => $caracter) {
-                echo "<tr>";
-                echo "<td>$indice</td>";
-                echo "<td>$caracter</td>";
-                echo "</tr>";
-            }
+            codigoASCII();
         ?>
-    </table>
     <hr>
 
+
     <h2>Ejercicio 5</h2>
-
-
-
-
 
 <!-- 
     <h2>Ejemplo de POST</h2>
