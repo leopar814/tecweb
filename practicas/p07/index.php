@@ -52,7 +52,42 @@
 
 
     <h2>Ejercicio 5</h2>
+    <p>
+        Usar las variables $edad y $sexo en una instrucción if para identificar una persona de
+        sexo “femenino”, cuya edad oscile entre los 18 y 35 años y mostrar un mensaje de
+        bienvenida apropiado.    
+    </p>
 
+    <form action="http://localhost/tecweb/practicas/p07/src/ejercicio5.php" method="post">
+        <fieldset>
+            <legend>Autorización</legend><br>
+
+            <label>Edad: </label>
+            <input type="number" name="edad" min="0" max="120" required><br><br>
+            
+            <label>Sexo: </label><br>
+            <input type="radio" name="sexo" value="masculino" required>Masculino<br>
+            <input type="radio" name="sexo" value="femenino">Femenino<br><br>
+            
+            <input type="submit" value="Validar">
+        </fieldset>
+    </form>
+    <hr>
+
+    <h2>Ejercicio 6</h2>
+    <p>
+        Registro de parque vehicular de una ciudad
+    </p>
+
+    <form action="http://localhost/tecweb/practicas/p07/src/ejercicio6.php" method="post">
+        <fieldset>
+            <legend>Parque vehicular</legend>
+            <label>Matrícula: </label><input type="text" name="matricula"><br><br>
+
+            <input type="submit" name="consulta" value="Consultar">
+            <input type="submit" name="consulta" value="Consultar todas">
+        </fieldset>
+    </form>
 <!-- 
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p07/index.php" method="post">
