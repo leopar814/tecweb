@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <script src="./src/main.js"></script>
+</head>
+<body>
+    <h1>JavaScript para principiantes</h1>
+
+    <h2>Hola mundo en JS</h2>
+    <div id="holaMundo">
+        <!-- 
+            <script type="text/javascript">
+                document.write('Hola Mundo');
+            </script> 
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="holaMundo();" />
+    <hr>
+
+    <h2>Variables</h2>
+    <div id="variables">
+        <!-- 
+            <script type = “text/javascript”>
+                var nombre = ‘Juan’;
+                var edad = 10;
+                var altura = 1.92;
+                var casado = false;
+
+                document.write( nombre );
+                document.write( ‘<br>’ );
+                document.write( edad );
+                document.write( ‘<br>’ );
+                document.write( altura );
+                document.write( ‘<br>’ );
+                document.write( casado );
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="variables();" />
+    <hr>
+
+    <h2>Entrada de datos por teclado</h2>
+    <div id="entradaDeDatos">
+        <!-- 
+            <script type = “text/javascript”>
+                var nombre;
+                var edad;
+                nombre = prompt(‘Ingresa tu nombre:’, ‘’);
+                edad = prompt(‘Ingresa tu edad:', ‘’);
+                document.write(‘Hola ’);
+                document.write(nombre);
+                document.write(‘ así que tienes ’);
+                document.write(edad);
+                document.write(‘ años’);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="entradaDeDatos();" />
+    <hr>
+    
+</body>
+</html>
