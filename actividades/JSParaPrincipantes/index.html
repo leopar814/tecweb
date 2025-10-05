@@ -9,7 +9,9 @@
 <body>
     <h1>JavaScript para principiantes</h1>
 
-    <h2>Hola mundo en JS</h2>
+    <h2>Introducción a JavaScript</h2>
+
+    <h3>Hola mundo en JS</h3>
     <div id="holaMundo">
         <!-- 
             <script type="text/javascript">
@@ -18,48 +20,387 @@
         -->
     </div>
     <input id="clickMe" type="button" value="clickMe" onclick="holaMundo();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('holaMundo');" />
     <hr>
 
-    <h2>Variables</h2>
+    <!------------------------------------------------------------------------------------------------------------------------------->
+
+    <h2>Variables, entradas y operadores</h2>
+
+    <h3>Variables</h3>
     <div id="variables">
         <!-- 
             <script type = “text/javascript”>
-                var nombre = ‘Juan’;
+                var nombre = "Juan";
                 var edad = 10;
                 var altura = 1.92;
                 var casado = false;
 
                 document.write( nombre );
-                document.write( ‘<br>’ );
+                document.write( "<br>" );
                 document.write( edad );
-                document.write( ‘<br>’ );
+                document.write( "<br>" );
                 document.write( altura );
-                document.write( ‘<br>’ );
+                document.write( "<br>" );
                 document.write( casado );
             </script>
         -->
     </div>
     <input id="clickMe" type="button" value="clickMe" onclick="variables();" />
-    <hr>
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('variables');" />
 
-    <h2>Entrada de datos por teclado</h2>
+    <h3>Entrada de datos por teclado</h3>
     <div id="entradaDeDatos">
         <!-- 
             <script type = “text/javascript”>
                 var nombre;
                 var edad;
-                nombre = prompt(‘Ingresa tu nombre:’, ‘’);
-                edad = prompt(‘Ingresa tu edad:', ‘’);
-                document.write(‘Hola ’);
+                nombre = prompt("Ingresa tu nombre:", "");
+                edad = prompt("Ingresa tu edad:', "");
+                document.write("Hola ");
                 document.write(nombre);
-                document.write(‘ así que tienes ’);
+                document.write(" así que tienes ");
                 document.write(edad);
-                document.write(‘ años’);
+                document.write(" años");
             </script>
         -->
     </div>
     <input id="clickMe" type="button" value="clickMe" onclick="entradaDeDatos();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('entradaDeDatos');" />
+
     <hr>
+
+    <!------------------------------------------------------------------------------------------------------------------------------->
+
+    <h2>Estructuras de condición</h2>
+
+    <h3>Programación estructurada</h3>
+    <div id="prograEstructurada">
+        <!-- 
+            <script type=“text/javascript”>
+                var valor1;
+                var valor2;
+                valor1 = prompt("Introducir primer número:", "");
+                valor2 = prompt("Introducir segundo número", "");
+                var suma = parseInt(valor1)+parseInt(valor2);
+                var producto = parseInt(valor1)*parseInt(valor2);
+                document.write("La suma es ");
+                document.write(suma);
+                document.write("<br>");
+                document.write("El producto es ");
+                document.write(producto);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="prograEstructurada();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('prograEstructurada');" />
+
+    <h3>Sentencia if</h3>
+    <div id="condicionalSimple">
+        <!-- 
+            <script type=“text/javascript”>
+                var nombre;
+                var nota;
+                nombre = prompt("Ingresa tu nombre:", "");
+                nota = prompt("Ingresa tu nota:", "");
+                if (nota>=4)
+                    document.write(nombre+" esta aprobado con un "+nota);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="condicionalSimple();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('condicionalSimple');" />
+
+    <h3>Sentencia if-else</h3>
+    <div id="condicionalCompuesta">
+        <!-- 
+            <script type=“text/javascript”>
+                var num1,num2;
+                num1 = prompt("Ingresa el primer número:", "");
+                num2 = prompt("Ingresa el segundo número:", "");
+                num1 = parseInt(num1);
+                num2 = parseInt(num2);
+                if (num1>num2)
+                    document.write("el mayor es "+num1);
+                else
+                    document.write("el mayor es "+num2);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="condicionalCompuesta();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('condicionalCompuesta');" />
+
+
+    <h3>Sentencias if-else anidadas</h3>
+    <div id="condicionalAnidada">
+        <!-- 
+           <script type=“text/javascript”>
+                var nota1,nota2,nota3;
+
+                nota1 = prompt("Ingresa 1ra. nota:", "");
+                nota2 = prompt("Ingresa 2da. nota:", "");
+                nota3 = prompt("Ingresa 3ra. nota:", "");
+
+                //Convertimos los 3 string en enteros
+                nota1 = parseInt(nota1);
+                nota2 = parseInt(nota2);
+                nota3 = parseInt(nota3);
+
+                var pro;
+                pro = (nota1+nota2+nota3)/3;
+                if (pro>=7)
+                    document.write("aprobado");
+                else {
+                    if (pro>=4)
+                        document.write("regular");
+                    else
+                        document.write("reprobado");
+                }
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="condicionalAnidada();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('condicionalAnidada');" />
+
+    <h3>Sentencia switch</h3>
+    <div id="condicionalSwitch">
+        <!-- 
+           <script type=“text/javascrip”>
+                var valor;
+                valor = prompt("Ingresar un valor comprendido entre 1 y 5:"", "" );
+                //Convertimos a entero
+                valor = parseInt(valor);
+                switch (valor) {
+                    case 1: document.write("uno");
+                            break;
+                    case 2: document.write("dos");
+                            break;
+                    case 3: document.write("tres");
+                            break;
+                    case 4: document.write("cuatro");
+                            break;
+                    case 5: document.write("cinco");
+                            break;
+                    default: 
+                            document.write("debe ingresar un valor comprendido entre
+                            1 y 5.");
+                }
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="condicionalSwitch();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('condicionalSwitch');" />
+
+    <h3>Sentencia switch y entrada de datos</h3>
+    <div id="condicionalSwitch2">
+        <!-- 
+           <script type=“text/javascript”>
+                var col;
+                col = prompt(‘Ingresa el color con que quierar pintar el fondo de la ventana (rojo, verde, azul)’ , ‘’ );
+                switch (col) {
+                    case ‘rojo’: document.bgColor=‘#ff0000’;
+                                break;
+                    case ‘verde’: document.bgColor=‘#00ff00’;
+                                break;
+                    case ‘azul’: document.bgColor=‘#0000ff’;
+                                break;
+                }
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="condicionalSwitch2();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('condicionalSwitch2');" />
+    <hr>
+
+    <!------------------------------------------------------------------------------------------------------------------------------->
+    <h2>Estructuras de repetición</h2>
+
+    <h3>Sentencia while</h3>
+    <div id="sentenciaWhile">
+        <!-- 
+           <script type=“text/javascript”>
+                var x;
+                x=1;
+                while (x<=100) {
+                    document.write(x);
+                    document.write(‘<br>’);
+                    x=x+1;
+                }
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="sentenciaWhile();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('sentenciaWhile');" />
+
+    <h3>Acumulador</h3>
+    <div id="acumulador">
+        <!-- 
+           <script type=“text/javascript”>
+                var x=1;
+                var suma=0;
+                var valor;
+                while (x<=5){
+                    valor = prompt(‘Ingresa el valor:’, ‘’);
+                    valor = parseInt(valor);
+                    suma = suma+valor;
+                    x = x+1;
+                }
+                document.write(“La suma de los valores es ”+suma+“<br>”);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="acumulador();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('acumulador');" />
+
+    <h3>Sentencia do-while</h3>
+    <div id="sentenciaDoWhile">
+        <!-- 
+           <script type = “text/javascript”>
+                var valor;
+                do {
+                    valor = prompt(‘Ingresa un valor entre 0 y 999:’, ‘’);
+                    valor = parseInt(valor);
+                    document.write(‘El valor ’+valor+‘ tiene ’);
+                    if (valor<10)
+                        document.write(‘Tiene 1 dígitos’)
+                    else
+                        if (valor<100)
+                            document.write(‘Tiene 2 dígitos’);
+                        else
+                            document.write(‘Tiene 3 dígitos’);
+                        document write(‘<br>’);
+                } while(valor!=0);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="sentenciaDoWhile();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('sentenciaDoWhile');" />
     
+    <h3>Sentencia for</h3>
+    <div id="sentenciaFor">
+        <!-- 
+           <script type=“text/javascript”>
+                var f;
+                for(f=1; f<=10; f++)
+                    document.write(f+“ ”);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="sentenciaFor();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('sentenciaFor');" />
+    <hr>
+
+    <h2>Funciones</h2>
+
+    <h3>Implementación sin función</h3>
+    <div id="sinFunciones">
+        <!-- 
+           <script type = “text/javascript”>
+                document.write(“Cuidado<br>”);
+                document.write(“Ingresa tu documento correctamente<br>”);
+                document.write(“Cuidado<br>”);
+                document.write(“Ingresa tu documento correctamente<br>”);
+                document.write(“Cuidado<br>”);
+                document.write(“Ingresa tu documento correctamente<br>”);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="sinFunciones();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('sinFunciones');" />
+
+    <h3>Implementación con función</h3>
+    <div id="conFunciones">
+        <!-- 
+           <script type = “text/javascript”>
+                function mostrarMensaje() {
+                    document.write(“Cuidado<br>”);
+                    document.write(“Ingresa tu documento correctamente<br>”);
+                }
+                mostrarMensaje();
+                mostrarMensaje();
+                mostrarMensaje();
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="conFunciones();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('conFunciones');" />
+
+    <h3>Función con parámetros</h3>
+    <div id="funcionConParam">
+        <!-- 
+           <script type = “text/javascript”>
+                function mostrarRango(x1,x2) {
+                    var inicio;
+                    for(inicio=x1; inicio<=x2; inicio++)
+                        document.write(inicio+‘ ’);
+                }
+                        
+                var valor1,valor2;
+                valor1 = prompt(‘Ingresa el valor inferior:’, ‘’);
+                valor1 = parseInt(valor1);
+                valor2 = prompt(‘Ingresa el valor superior:’, ‘’);
+                valor2 = parseInt(valor2);
+                mostrarRango(valor1,valor2);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="funcionConParam();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('funcionConParam');" />
+
+    <h3>Retorno de valor</h3>
+    <div id="retornoDeValor">
+        <!-- 
+           <script type = “text/javascript”>
+                function convertirCastellano(x) {
+                    if(x==1)
+                        return “uno”;
+                    else
+                        if(x==2)
+                            return “dos”;
+                        else
+                            if(x==3)
+                                return “tres”;
+                            else
+                                if(x==4)
+                                    return “cuatro”;
+                                else
+                                    if(x==5)
+                                        return “cinco”;
+                                    else
+                                        return “valor incorrecto”;
+                }
+                var valor = prompt(“Ingresa un valor entre 1 y 5”, “”);
+                valor = parseInt(valor);
+                var r = convertirCastellano(valor);
+                document.write(r);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="retornoDeValor();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('retornoDeValor');" />
+
+    <h3>Retorno de valor con switch</h3>
+    <div id="retornoDeValorSwitch">
+        <!-- 
+           <script type = “text/javascript”>
+                function convertirCastellano(x) {
+                    switch (x) {
+                        case 1: return "uno";
+                        case 2: return "dos";
+                        case 3: return "tres";
+                        case 4: return "cuatro";
+                        case 5: return "cinco";
+                        default: return "valor incorrecto";
+                    }
+                }
+                var valor = prompt(“Ingresa un valor entre 1 y 5”, “”);
+                valor = parseInt(valor);
+                var r = convertirCastellano(valor);
+                document.write(r);
+            </script>
+        -->
+    </div>
+    <input id="clickMe" type="button" value="clickMe" onclick="retornoDeValorSwitch();" />
+    <input id="clickMe" type="button" value="limpiar" onclick="limpiar('retornoDeValorSwitch');" />
 </body>
 </html>
