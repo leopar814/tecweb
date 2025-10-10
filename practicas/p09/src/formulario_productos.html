@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de productos</title>
+    <style type="text/css">
+        li { 
+            list-style: none;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        label {
+            width: 80px;
+        }
+        input {
+            width: 18em;
+            height: 2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de nuevos Productos en Marketzone</h1>
+    <form id="formulario" method="POST" action="http://localhost/tecweb/practicas/p09/src/set_producto_v2.php">
+        <ul>
+            <li><label>Nombre del producto: </label><input type="text" name="nombre" required maxlength="100"/></li>
+            <li><label>Marca: </label><input type="text" name="marca" required maxlength="25"/></li>
+            <li><label>Modelo: </label><input type="text" name="modelo" required maxlength="25"/></li>
+            <li><label>Precio: </label><input type="number" name="precio" step="0.01" min="0"/></li>
+            <li><label>Detalles: </label><textarea rows="5" cols="50" name="detalles"  maxlength="250"></textarea></li>
+            <li><label>Unidades: </label><input type="number" name="unidades" min="0" step="1"/></li>
+            <li><label>Imagen: </label><input type="text" name="imagen"  maxlength="100" placeholder="Nombre del archivo de la imagen"/></li>
+        
+        </ul>
+        
+        <input type="submit" value="Registrar producto" />
+        <input type="reset" value = "Limpiar" />
+    
+    </form>
+
+    <!-- <script src="validacionDeDatos.js"></script> -->
+</body>
+</html>
