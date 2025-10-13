@@ -56,7 +56,7 @@
             
             </ul>
             
-            <input type="submit" value="Registrar producto" />
+            <input type="submit" value="Actualizar producto" />
             <input type="reset" value = "Limpiar" />
         
         </form>
