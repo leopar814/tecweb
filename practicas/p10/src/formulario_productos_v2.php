@@ -28,8 +28,9 @@
     </head>
     <body>
         <h1>Registro de nuevos Productos en Marketzone</h1>
-        <form id="formulario" method="POST" action="http://localhost/tecweb/practicas/p09/src/set_producto_v2.php">
+        <form id="formulario" method="POST" action="http://localhost/tecweb/practicas/p10/src/update_producto.php">
             <ul id="entradas">
+                <li><input type="hidden" name="id_producto" value="<?= !empty($_POST['id_producto'])?$_POST['id_producto']:$_GET['id_producto'] ?>"/></li>
                 <li><label>Nombre del producto: </label><input type="text" name="nombre" value="<?= !empty($_POST['nombre'])?$_POST['nombre']:$_GET['nombre'] ?>" /><span class="error"></span></li>
                 <li><label>Marca: </label>
                     <?php

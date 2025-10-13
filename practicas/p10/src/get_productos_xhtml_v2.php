@@ -47,17 +47,18 @@
 			y que pertenecen a la clase "row-data".
 			*/
 
-			var nombre = data[0].innerHTML;
-			var marca = data[1].innerHTML;
-			var modelo = data[2].innerHTML;
-			var precio = data[3].innerHTML;
-			var unidades = data[4].innerHTML;
-			var detalles = data[5].innerHTML;
-			var imagen = data[6].querySelector("img").getAttribute("src");
+			var id = data[0].innerHTML;
+			var nombre = data[1].innerHTML;
+			var marca = data[2].innerHTML;
+			var modelo = data[3].innerHTML;
+			var precio = data[4].innerHTML;
+			var unidades = data[5].innerHTML;
+			var detalles = data[6].innerHTML;
+			var imagen = data[7].querySelector("img").getAttribute("src");
 
 			// alert("Name: " + name + "\nAge: " + age);
 			console.log(data);
-			send2form(nombre, marca, modelo, precio, detalles, unidades, imagen);
+			send2form(id, nombre, marca, modelo, precio, detalles, unidades, imagen);
 		}
 	</script>
 	<head>
@@ -88,7 +89,7 @@
 				</thead>
 				<tbody>
 					<tr id=<?= $id++ ?> >
-						<th scope="row"><?= $registro['id'] ?></th>
+						<th scope="row" class="row-data"><?= $registro['id'] ?></th>
 						<td class="row-data"><?= $registro['nombre'] ?></td>
 						<td class="row-data"><?= $registro['marca'] ?></td>
 						<td class="row-data"><?= $registro['modelo'] ?></td>
@@ -109,8 +110,9 @@
 		<?php endforeach; ?>
 
 		<script>
-            function send2form(nombre, marca, modelo, precio, detalles, unidades, imagen) {
+            function send2form(id, nombre, marca, modelo, precio, detalles, unidades, imagen) {
                 var urlForm = './formulario_productos_v2.php'; 
+				var propId = "id_producto="+ id;
                 var propNombre = "nombre=" + nombre;
                 var propMarca = "marca=" + marca;
                 var propModelo = "modelo=" + modelo;
@@ -119,7 +121,8 @@
                 var propUnidades = "unidades=" + unidades;
                 var propImagen = "imagen=" + imagen;
                 window.open(urlForm + 
-							"?" + propNombre + 
+							"?" + propId +
+							"&" + propNombre + 
 							"&" + propMarca + 
 							"&" + propModelo + 
 							"&" + propPrecio + 
