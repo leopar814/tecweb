@@ -1,3 +1,5 @@
+
+import { validarProducto } from "./validacionDeDatos";
 // JSON BASE A MOSTRAR EN FORMULARIO
 var baseJSON = {
     "precio": 0.0,
@@ -120,7 +122,7 @@ function buscarProducto(e) {
 // FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
 function agregarProducto(e) {
     e.preventDefault();
-
+    
     // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
     var productoJsonString = document.getElementById('description').value;
     // SE CONVIERTE EL JSON DE STRING A OBJETO
@@ -129,18 +131,30 @@ function agregarProducto(e) {
     finalJSON['nombre'] = document.getElementById('name').value;
     // SE OBTIENE EL STRING DEL JSON FINAL
     productoJsonString = JSON.stringify(finalJSON,null,2);
+    // SE VALIDAN LOS DATOS DEL JSON
+    const { valido, errores } = validarProducto(productoJsonString);
 
-    // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
-    var client = getXMLHttpRequest();
-    client.open('POST', './backend/create.php', true);
-    client.setRequestHeader('Content-Type', "application/json;charset=UTF-8");
-    client.onreadystatechange = function () {
-        // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
-        if (client.readyState == 4 && client.status == 200) {
-            console.log(client.responseText);
+    if( !valido ) {
+        const contenedoresErrores = document.querySelectorAll("#entradas .error");
+        contenedoresErrores.forEach(error => error.textContent = "");
+        const campos = ["nombre", "marca", "modelo", "precio", "detalles", "unidades"];
+        
+        campos.forEach((campo, i) => {
+            if (errores[campo])
+                contenedoresErrores[i].textContent = errores[campo];
+        });
+    }
+    else {
+        var client = getXMLHttpRequest(); // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
+        client.open('POST', './backend/create.php', true);
+        client.setRequestHeader('Content-Type', "application/json;charset=UTF-8");
+        client.onreadystatechange = function () {
+            // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
+            if (client.readyState == 4 && client.status == 200)
+                console.log(client.responseText);
         }
+        client.send(productoJsonString);
     };
-    client.send(productoJsonString);
 }
 
 // SE CREA EL OBJETO DE CONEXIÓN COMPATIBLE CON EL NAVEGADOR
