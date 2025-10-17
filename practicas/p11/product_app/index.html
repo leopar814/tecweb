@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <title>Product App</title>
+    <style>
+      span {
+        white-space: pre-line;
+        vertical-align: top;
+        display: inline-block;
+        color: red;
+
+      }
+    </style>
   </head>
   <body onload="init()">
 
@@ -26,6 +35,7 @@
           </div>
           <div>
             <textarea id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
+            <span class="error"></span>
           </div>
           <input type="hidden" id="taskId">
           <button type="submit" onclick="agregarProducto(event)" >
@@ -52,6 +62,6 @@
     </div>
 
     <!-- Lógica del Frontend -->
-    <script src="./app.js"></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

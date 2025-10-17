@@ -1,10 +1,12 @@
+import { validarProducto } from "./validacionDeDatos.js";
+
 // JSON BASE A MOSTRAR EN FORMULARIO
 var baseJSON = {
-    "precio": 0.0,
-    "unidades": 1,
-    "modelo": "XX-000",
     "marca": "NA",
+    "modelo": "XX000",
+    "precio": 100.0,
     "detalles": "NA",
+    "unidades": 1,
     "imagen": "img/default.png"
   };
 
@@ -127,20 +129,38 @@ function agregarProducto(e) {
     var finalJSON = JSON.parse(productoJsonString);
     // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
     finalJSON['nombre'] = document.getElementById('name').value;
-    // SE OBTIENE EL STRING DEL JSON FINAL
-    productoJsonString = JSON.stringify(finalJSON,null,2);
 
-    // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
-    var client = getXMLHttpRequest();
-    client.open('POST', './backend/create.php', true);
-    client.setRequestHeader('Content-Type', "application/json;charset=UTF-8");
-    client.onreadystatechange = function () {
-        // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
-        if (client.readyState == 4 && client.status == 200) {
-            console.log(client.responseText);
-        }
-    };
-    client.send(productoJsonString);
+    const { valido, errores } = validarProducto(finalJSON);
+
+    const contenedoresErrores = document.querySelector(".error");
+    contenedoresErrores.textContent = "";
+
+    if(!valido) {
+
+        const campos = ["nombre", "marca", "modelo", "precio", "detalles", "unidades"];
+        campos.forEach((campo) => {
+            if (errores[campo])
+                contenedoresErrores.textContent += errores[campo] + "\n";
+        });
+
+        return;
+    }
+    else {
+        // SE OBTIENE EL STRING DEL JSON FINAL
+        productoJsonString = JSON.stringify(finalJSON,null,2);
+        // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
+        var client = getXMLHttpRequest();
+        client.open('POST', './backend/create.php', true);
+        client.setRequestHeader('Content-Type', "application/json;charset=UTF-8");
+        client.onreadystatechange = function () {
+            // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
+            if (client.readyState == 4 && client.status == 200) {
+                console.log(client.responseText);
+                alert(client.responseText);
+            }
+        };
+        client.send(productoJsonString);
+    }
 }
 
 // SE CREA EL OBJETO DE CONEXIÓN COMPATIBLE CON EL NAVEGADOR
@@ -177,3 +197,8 @@ function init() {
     var JsonString = JSON.stringify(baseJSON,null,2);
     document.getElementById("description").value = JsonString;
 }
+
+window.init = init;
+window.buscarID = buscarID;
+window.buscarProducto = buscarProducto;
+window.agregarProducto = agregarProducto;
