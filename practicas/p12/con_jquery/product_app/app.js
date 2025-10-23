@@ -36,7 +36,7 @@ $(document).ready(function() {
     if($('#search').val()) {
       let search = $('#search').val();
       $.ajax({
-        url: 'product-search.php',
+        url: './backend/product-search.php',
         data: {search},
         type: 'POST',
         success: function (response) {
@@ -63,7 +63,7 @@ $(document).ready(function() {
       description: $('#description').val(),
       id: $('#taskId').val()
     };
-    const url = edit === false ? 'product-add.php' : 'product-edit.php';
+    const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
     console.log(postData, url);
     $.post(url, postData, (response) => {
       console.log(response);
@@ -79,17 +79,26 @@ $(document).ready(function() {
       type: 'GET',
       success: function(response) {
         const products = JSON.parse(response);
+        console.log(products);
         let template = '';
+        let descripcion = '';
         products.forEach(product => {
+            descripcion = '';
+            descripcion += '<li>precio: '+product.precio+'</li>';
+            descripcion += '<li>unidades: '+product.unidades+'</li>';
+            descripcion += '<li>modelo: '+product.modelo+'</li>';
+            descripcion += '<li>marca: '+product.marca+'</li>';
+            descripcion += '<li>detalles: '+product.detalles+'</li>';
+
           template += `
-                  <tr taskId="${product.id}">
+                  <tr productId="${product.id}">
                   <td>${product.id}</td>
                   <td>
                   <a href="#" class="product-item">
-                    ${product.name} 
+                    ${product.nombre} 
                   </a>
                   </td>
-                  <td>${product.description}</td>
+                  <td>${descripcion}</td>
                   <td>
                     <button class="product-delete btn btn-danger">
                      Delete 
@@ -107,7 +116,7 @@ $(document).ready(function() {
   $(document).on('click', '.product-item', (e) => {
     const element = $(this)[0].activeElement.parentElement.parentElement;
     const id = $(element).attr('taskId');
-    $.post('product-single.php', {id}, (response) => {
+    $.post('./backend/product-single.php', {id}, (response) => {
       const product = JSON.parse(response);
       $('#name').val(product.name);
       $('#description').val(product.description);
