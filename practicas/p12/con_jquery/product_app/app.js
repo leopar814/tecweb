@@ -15,9 +15,7 @@ function init() {
      */
     var JsonString = JSON.stringify(baseJSON,null,2);
     document.getElementById("description").value = JsonString;
-
-    // SE LISTAN TODOS LOS PRODUCTOS
-    // listarProductos();
+    document.getElementById("name").value="";
 }
 
 // Conforme se vayan presionando teclas en la búsqueda
@@ -78,49 +76,51 @@ $(document).ready(function() {
     }
   });
 
-  $('#product-form').submit(e => {
-    e.preventDefault();
+    $('#product-form').submit(e => {
+        e.preventDefault();
 
-    const productoJsonString = $('#description').val();
-    const finalJSON = JSON.parse(productoJsonString);
-    finalJSON.nombre = $('#name').val();
+        const productoJsonString = $('#description').val();
+        const finalJSON = JSON.parse(productoJsonString);
+        finalJSON.nombre = $('#name').val();
 
-    const postData = JSON.stringify(finalJSON);
+        const postData = JSON.stringify(finalJSON);
 
-    const url = './backend/product-add.php';
+        const url = edit === false 
+            ? './backend/product-add.php' 
+            : './backend/product-edit.php';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: postData,
+            contentType: 'application/json',
+            success: function(response) {
+                console.log(response);
+                // Respuesta en JSON
+                let res;
+                try {
+                res = JSON.parse(response);
+                } catch (e) {
+                res = { status: 'error', message: 'Respuesta inválida del servidor' };
+                }
 
-    $.ajax({
-      url: url,
-      type: 'POST',
-      data: postData,
-      contentType: 'application/json',
-      success: function(response) {
+                let template_bar = '';
+                    template_bar += 
+                        `
+                        <li style="list-style: none;">status: ${res.status}</li>
+                        <li style="list-style: none;">message: ${res.message}</li>
+                        `;
+                $('#product-result').show();
 
-        // Respuesta en JSON
-        let res;
-        try {
-          res = JSON.parse(response);
-        } catch (e) {
-          res = { status: 'error', message: 'Respuesta inválida del servidor' };
-        }
+                // Se muestra el mensaje
+                $('#container').html(template_bar);
 
-        let template_bar = '';
-            template_bar += 
-                `
-                <li style="list-style: none;">status: ${res.status}</li>
-                <li style="list-style: none;">message: ${res.message}</li>
-                `;
-        console.log(template_bar);
-        $('#product-result').show();
+                listarProductos();
+            }
+        });
 
-        // Se muestra el mensaje
-        $('#container').html(template_bar);
-
-        listarProductos();
-      }
+        $('#agregarProducto').text("Agregar Producto");
+        edit = false;
     });
-
-  });
 
   // Fetching products
   function listarProductos() {
@@ -161,40 +161,68 @@ $(document).ready(function() {
     });
   }
 
-  // Delete a Single product
-  $(document).on('click', '.product-delete', (e) => {
-    if(confirm('Estás seguro que quieres eliminarlo?')) {
+  // Obtener producto para editarlo
+    $(document).on('click', '.product-item', (e) => {
+
+        e.preventDefault();
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const id = $(element).attr('productId');
-        $.ajax({
-            url: './backend/product-delete.php',
-            type: 'GET',
-            data: {id},
-            success: function(response) {
+        $.post('./backend/product-single.php', {id}, (response) => {
+            const product = JSON.parse(response);
 
-                // Respuesta en JSON
-                let res;
-                try {
-                res = JSON.parse(response);
-                } catch (e) {
-                res = { status: 'error', message: 'Respuesta inválida del servidor' };
-                }
-
-                let template_bar = '';
-                    template_bar += 
-                        `
-                        <li style="list-style: none;">status: ${res.status}</li>
-                        <li style="list-style: none;">message: ${res.message}</li>
-                        `;
-                console.log(template_bar);
-                $('#product-result').show();
-
-                // Se muestra el mensaje
-                $('#container').html(template_bar);
-
-                listarProductos();
+            let description = {
+                "precio" : product.precio,
+                "unidades" : product.unidades,
+                "modelo" : product.modelo,
+                "marca" : product.marca,
+                "detalles" : product.detalles,
+                "imagen" : product.imagen,
             }
+            description = JSON.stringify(description, null, 2)
+            
+            $('#name').val(product.nombre);
+            $('#description').val(description);
+            $('#productId').val(product.id);
+
+            $('#agregarProducto').text("Modificar Producto");
+            edit = true;
         });
-    }
-  });
-});
+        
+    });
+
+    // Eliminar product
+    $(document).on('click', '.product-delete', (e) => {
+        if(confirm('Estás seguro que quieres eliminarlo?')) {
+            const element = $(this)[0].activeElement.parentElement.parentElement;
+            const id = $(element).attr('productId');
+            $.ajax({
+                url: './backend/product-delete.php',
+                type: 'GET',
+                data: {id},
+                success: function(response) {
+
+                    // Respuesta en JSON
+                    let res;
+                    try {
+                    res = JSON.parse(response);
+                    } catch (e) {
+                    res = { status: 'error', message: 'Respuesta inválida del servidor' };
+                    }
+
+                    let template_bar = '';
+                        template_bar += 
+                            `
+                            <li style="list-style: none;">status: ${res.status}</li>
+                            <li style="list-style: none;">message: ${res.message}</li>
+                            `;
+                    $('#product-result').show();
+
+                    // Se muestra el mensaje
+                    $('#container').html(template_bar);
+
+                    listarProductos();
+                }
+            });
+        }
+    });
+    });
