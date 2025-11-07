@@ -1,4 +1,7 @@
 
+// Barra de estado
+let erroresAcumulados = [];
+
 function validarCampo(campo, valor) {
     let response = { status: "ok", message: "" };
 
@@ -90,8 +93,7 @@ function validarProducto(producto) {
     return true;
 }
 
-// Barra de estado
-let erroresAcumulados = [];
+
 
 function mostrarErroresEnBarra(campo, mensaje) {
     
@@ -105,7 +107,7 @@ function mostrarErroresEnBarra(campo, mensaje) {
     // Reconstruir la lista completa
     let html = "";
     erroresAcumulados.forEach(err => {
-        html += `<li style="color: red; list-style:none;">${err.campo}: ${err.mensaje}</li>`;
+        html += `<li style="color: red; list-style:none;">${err.mensaje}</li>`;
     });
 
     $("#product-result").show();
@@ -117,7 +119,7 @@ function actualizarErrores(campo) {
     // Reconstruir barra con los errores restantes
     let html = "";
     erroresAcumulados.forEach(err => {
-        html += `<li style="color: red; list-style:none;">${err.campo}: ${err.mensaje}</li>`;
+        html += `<li style="color: red; list-style:none;">${err.mensaje}</li>`;
     });
 
     if (erroresAcumulados.length > 0) {

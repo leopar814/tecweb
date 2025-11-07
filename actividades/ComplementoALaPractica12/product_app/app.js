@@ -139,7 +139,7 @@ $(document).ready(function(){
 
     $('#product-form').submit(e => {
         e.preventDefault();
-
+        let postData = {};
         postData['nombre'] = $('#nombre').val();
         postData['marca'] = $('#marca').val();
         postData['modelo'] = $('#modelo').val();
@@ -163,8 +163,7 @@ $(document).ready(function(){
                             <li style="list-style: none;">message: ${respuesta.message}</li>
                         `;
                 // SE REINICIA EL FORMULARIO
-                $('#nombre').val('');
-                $('#description').val(JsonString);
+                $('#product-form')[0].reset();
                 // SE HACE VISIBLE LA BARRA DE ESTADO
                 $('#product-result').show();
                 // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
@@ -174,7 +173,7 @@ $(document).ready(function(){
                 // SE REGRESA LA BANDERA DE EDICIÓN A false
                 edit = false;
             });
-        }
+        } else return;
     });
 
     $(document).on('click', '.product-delete', (e) => {
