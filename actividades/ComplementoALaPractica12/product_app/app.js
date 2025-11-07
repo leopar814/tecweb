@@ -1,18 +1,6 @@
-// JSON BASE A MOSTRAR EN FORMULARIO
-// var baseJSON = {
-//     "precio": 0.0,
-//     "unidades": 1,
-//     "modelo": "XX-000",
-//     "marca": "NA",
-//     "detalles": "NA",
-//     "imagen": "img/default.png"
-//   };
-
 $(document).ready(function(){
     let edit = false;
 
-    let JsonString = JSON.stringify(baseJSON,null,2);
-    $('#description').val(JsonString);
     $('#product-result').hide();
     listarProductos();
 
@@ -118,44 +106,67 @@ $(document).ready(function(){
         }
     });
 
+    // Validación especial del nombre en el servidor
+    $("#name").keyup(function() {
+        const nombre = $(this).val();
+
+        if(nombre != '') {
+            $.get('./backend/product-search.php?nombre=' + nombre, function(response){
+                const data = JSON.parse(response);
+                if(Object.keys(data).length > 0) {
+                    html = '<li style="color: red; list-style:none;">El producto ya existe en la BD</li>';
+                    $("#product-result").show();
+                    $("#container").html(html);
+                } else {
+                    $("#container").html("");
+                    $("#product-result").hide();
+                }
+            });
+        }
+    });
+
     $('#product-form').submit(e => {
         e.preventDefault();
 
-        // SE CONVIERTE EL JSON DE STRING A OBJETO
-        let postData = JSON.parse( $('#description').val() );
-        // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
         postData['nombre'] = $('#name').val();
+        postData['marca'] = $('#marca').val();
+        postData['modelo'] = $('#modelo').val();
+        postData['precio'] = $('#precio').val();
+        postData['unidades'] = $('#unidades').val();
+        postData['detalles'] = $('#detalles').val();
+        postData['imagen'] = $('#imagen').val();
         postData['id'] = $('#productId').val();
 
         /**
          * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
          * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR
          **/
-
-        const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
-        
-        $.post(url, postData, (response) => {
-            //console.log(response);
-            // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-            let respuesta = JSON.parse(response);
-            // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
-            let template_bar = '';
-            template_bar += `
-                        <li style="list-style: none;">status: ${respuesta.status}</li>
-                        <li style="list-style: none;">message: ${respuesta.message}</li>
-                    `;
-            // SE REINICIA EL FORMULARIO
-            $('#name').val('');
-            $('#description').val(JsonString);
-            // SE HACE VISIBLE LA BARRA DE ESTADO
-            $('#product-result').show();
-            // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
-            $('#container').html(template_bar);
-            // SE LISTAN TODOS LOS PRODUCTOS
-            listarProductos();
-            // SE REGRESA LA BANDERA DE EDICIÓN A false
-            edit = false;
-        });
+        if(validarProducto(postData)) {
+            const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
+            
+            $.post(url, postData, (response) => {
+                //console.log(response);
+                // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
+                let respuesta = JSON.parse(response);
+                // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
+                let template_bar = '';
+                template_bar += `
+                            <li style="list-style: none;">status: ${respuesta.status}</li>
+                            <li style="list-style: none;">message: ${respuesta.message}</li>
+                        `;
+                // SE REINICIA EL FORMULARIO
+                $('#name').val('');
+                $('#description').val(JsonString);
+                // SE HACE VISIBLE LA BARRA DE ESTADO
+                $('#product-result').show();
+                // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
+                $('#container').html(template_bar);
+                // SE LISTAN TODOS LOS PRODUCTOS
+                listarProductos();
+                // SE REGRESA LA BANDERA DE EDICIÓN A false
+                edit = false;
+            });
+        }
     });
 
     $(document).on('click', '.product-delete', (e) => {
@@ -177,16 +188,14 @@ $(document).ready(function(){
             let product = JSON.parse(response);
             // SE INSERTAN LOS DATOS ESPECIALES EN LOS CAMPOS CORRESPONDIENTES
             $('#name').val(product.nombre);
+            $('#marca').val(product.marca);
+            $('#modelo').val(product.modelo);
+            $('#precio').val(product.precio);
+            $('#unidades').val(product.unidades);
+            $('#detalles').val(product.detalles);
+            $('#imagen').val(product.imagen);
             // EL ID SE INSERTA EN UN CAMPO OCULTO PARA USARLO DESPUÉS PARA LA ACTUALIZACIÓN
             $('#productId').val(product.id);
-            // SE ELIMINA nombre, eliminado E id PARA PODER MOSTRAR EL JSON EN EL <textarea>
-            delete(product.nombre);
-            delete(product.eliminado);
-            delete(product.id);
-            // SE CONVIERTE EL OBJETO JSON EN STRING
-            let JsonString = JSON.stringify(product,null,2);
-            // SE MUESTRA STRING EN EL <textarea>
-            $('#description').val(JsonString);
             
             // SE PONE LA BANDERA DE EDICIÓN EN true
             edit = true;
