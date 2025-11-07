@@ -61,7 +61,7 @@ function validarCampo(campo, valor) {
             if (!Number.isFinite(unidadesNum) || unidadesNum < 0) {
                 response = {
                     status: "error",
-                    message: "Unidades inválida"
+                    message: "Unidades inválido"
                 };
             }
             break;
@@ -93,38 +93,37 @@ function validarProducto(producto) {
 // Barra de estado
 let erroresAcumulados = [];
 
-function mostrarErroresEnBarra(erroresArray) {
+function mostrarErroresEnBarra(campo, mensaje) {
+    
+    const idx = erroresAcumulados.findIndex(err => err.campo === campo);
 
-    // Agregar los nuevos errores SIN perder los anteriores
-    erroresArray.forEach(err => {
-        if (!erroresAcumulados.includes(err)) {
-            erroresAcumulados.push(err);
-        }
-    });
+    if (idx === -1)
+        erroresAcumulados.push({ campo, mensaje });
+
+    
 
     // Reconstruir la lista completa
     let html = "";
     erroresAcumulados.forEach(err => {
-        html += `<li style="color: red; list-style:none;">${err}</li>`;
+        html += `<li style="color: red; list-style:none;">${err.campo}: ${err.mensaje}</li>`;
     });
 
     $("#product-result").show();
     $("#container").html(html);
 }
 
-
-// Validación después de perder el foco de c/ campo
-$(document).ready(function(){
-    // Validación simple en cuanto se sale del campo (on blur)
-    $("#name, #marca, #modelo, #precio, #unidades, #detalles").on("blur", function(){
-        const campo = this.id === "name" ? "nombre" : this.id;
-        const valor = $(this).val();
-        const resultado = validarCampo(campo, valor);
-
-        if (resultado.status === "error") {
-            mostrarErroresEnBarra([`${campo}: ${resultado.message}`]);
-        }
+function actualizarErrores(campo) {
+    erroresAcumulados = erroresAcumulados.filter(err => err.campo !== campo);
+    // Reconstruir barra con los errores restantes
+    let html = "";
+    erroresAcumulados.forEach(err => {
+        html += `<li style="color: red; list-style:none;">${err.campo}: ${err.mensaje}</li>`;
     });
 
-    
-});
+    if (erroresAcumulados.length > 0) {
+        $("#product-result").show();
+        $("#container").html(html);
+    } else {
+        $("#product-result").hide();
+    }
+}

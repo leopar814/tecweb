@@ -107,7 +107,7 @@ $(document).ready(function(){
     });
 
     // Validación especial del nombre en el servidor
-    $("#name").keyup(function() {
+    $("#nombre").keyup(function() {
         const nombre = $(this).val();
 
         if(nombre != '') {
@@ -125,10 +125,22 @@ $(document).ready(function(){
         }
     });
 
+    $("#nombre, #marca, #modelo, #precio, #unidades, #detalles").on("blur", function(){
+        const campo = this.id;
+        const valor = $(this).val();
+        const resultado = validarCampo(campo, valor);
+
+        if (resultado.status === "error") {
+            mostrarErroresEnBarra(campo, resultado.message);
+        } else {
+            actualizarErrores(campo);
+        }
+    });
+
     $('#product-form').submit(e => {
         e.preventDefault();
 
-        postData['nombre'] = $('#name').val();
+        postData['nombre'] = $('#nombre').val();
         postData['marca'] = $('#marca').val();
         postData['modelo'] = $('#modelo').val();
         postData['precio'] = $('#precio').val();
@@ -137,10 +149,6 @@ $(document).ready(function(){
         postData['imagen'] = $('#imagen').val();
         postData['id'] = $('#productId').val();
 
-        /**
-         * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
-         * --> EN CASO DE NO HABER ERRORES, SE ENVIAR EL PRODUCTO A AGREGAR
-         **/
         if(validarProducto(postData)) {
             const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
             
@@ -155,7 +163,7 @@ $(document).ready(function(){
                             <li style="list-style: none;">message: ${respuesta.message}</li>
                         `;
                 // SE REINICIA EL FORMULARIO
-                $('#name').val('');
+                $('#nombre').val('');
                 $('#description').val(JsonString);
                 // SE HACE VISIBLE LA BARRA DE ESTADO
                 $('#product-result').show();
@@ -187,7 +195,7 @@ $(document).ready(function(){
             // SE CONVIERTE A OBJETO EL JSON OBTENIDO
             let product = JSON.parse(response);
             // SE INSERTAN LOS DATOS ESPECIALES EN LOS CAMPOS CORRESPONDIENTES
-            $('#name').val(product.nombre);
+            $('#nombre').val(product.nombre);
             $('#marca').val(product.marca);
             $('#modelo').val(product.modelo);
             $('#precio').val(product.precio);
