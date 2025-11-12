@@ -11,7 +11,6 @@ $(document).ready(function(){
             success: function(response) {
                 // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
                 const productos = JSON.parse(response);
-            
                 // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
                 if(Object.keys(productos).length > 0) {
                     // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
@@ -54,6 +53,7 @@ $(document).ready(function(){
                 data: {search},
                 type: 'GET',
                 success: function (response) {
+                    console.log(response);
                     if(!response.error) {
                         // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
                         const productos = JSON.parse(response);

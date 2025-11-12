@@ -1,4 +1,6 @@
 <?php
+    namespace MARKETZONE\DB;
+    
     abstract class DataBase {
         protected $conexion;
 
