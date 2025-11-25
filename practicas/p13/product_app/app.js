@@ -21,7 +21,7 @@ $(document).ready(function(){
             url: './backend/product-list.php',
             type: 'GET',
             success: function(response) {
-                console.log(response);
+
                 // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
                 const productos = JSON.parse(response);
             
@@ -136,7 +136,7 @@ $(document).ready(function(){
         const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
         
         $.post(url, postData, (response) => {
-            console.log(response);
+
             // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
             let respuesta = JSON.parse(response);
             // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
@@ -163,7 +163,10 @@ $(document).ready(function(){
         if(confirm('¿Realmente deseas eliminar el producto?')) {
             const element = $(this)[0].activeElement.parentElement.parentElement;
             const id = $(element).attr('productId');
+
             $.post('./backend/product-delete.php', {id}, (response) => {
+                console.log(response);
+
                 $('#product-result').hide();
                 listarProductos();
             });
